@@ -1,7 +1,7 @@
-import { mongoose } from "mongoose"
+import  mongoose  from "mongoose"
 
 
-async function conectDB() {
+async function connectDB() {
     try {
         await mongoose.connect(process.env.MONGODB_URI)
 
@@ -12,4 +12,4 @@ async function conectDB() {
     }
 }
 
-module.exports= conectDB;
+export default connectDB;
