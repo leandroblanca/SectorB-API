@@ -5,11 +5,11 @@ const validationMiddleware = (req, res, next) => {
 
     if(!errors.isEmpty()) {
         return res.status(400).json({
-            sucess: false,
+            success: false,
             errors: errors.array()
         })
     }
     next()
 }
 
-module.exports = validationMiddleware;
+export default validationMiddleware;
