@@ -1,7 +1,6 @@
-const express = require("express")
-const cors = require("cors")
-const { use } = require("react")
-const { models } = require("mongoose")
+import express from "express"
+import cors from "cors"
+import authRoutes from "./routes/authRoutes.js"
 
 const app = express()
 
@@ -9,9 +8,12 @@ app.use(cors())
 
 app.use(express.json())
 
+app.use("/api/auth", authRoutes)
+
 app.get("/", (req, res) => {
     res.send("Api funciona correctamente")
 
 })
 
-module.exports = app
+
+export default app
