@@ -1,4 +1,4 @@
-import { body } from "express-validator";
+import  {body}  from "express-validator";
 
 const registerValidator = [
     body("name")
@@ -7,7 +7,7 @@ const registerValidator = [
 
     body("lastname")
     .notEmpty()
-    .withMessage("El apelldo es obligatorio"),
+    .withMessage("El apellido es obligatorio"),
 
     body("email")
     .notEmpty()
@@ -15,7 +15,7 @@ const registerValidator = [
     .isEmail()
     .withMessage("Debe ingresar un email valido"),
 
-    body("email")
+    body("password")
     .notEmpty()
     .withMessage("La contraseña es obligatorio")
     .isLength({min: 6})
@@ -37,7 +37,7 @@ const loginValidator = [
 ]
 
 
-module.exports = {
+export {
     registerValidator,
     loginValidator
 }
