@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const serviceSchema = new mongoose.Schema({
-    name :{
+    title :{
         type: String,
         required: [true, "El nombre de los servicios es requerido"],
         trim: true,
