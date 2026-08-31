@@ -18,7 +18,7 @@ async function registerController(req, res) {
             lastname,
             email,
             password: hashedPassword,
-            role: "admin"
+            role: "client"
         })
 
         await user.save()
