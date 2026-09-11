@@ -1,5 +1,5 @@
 import Service from "../models/service.js"
-
+console.log("🚨 SERVICE CONTROLLER CARGADO 🚨");
  async function CreateServiceController(req, res) {
     try {
         const service = await Service.create(req.body);
@@ -18,14 +18,19 @@ import Service from "../models/service.js"
 }
 
 async function getServiceController(req, res) {
+    console.log("➡️ ENTRO AL getServiceController");
     try {
+        console.log("➡️ VOY A BUSCAR LOS SERVICIOS");
         const services = await Service.find()
 
+        console.log("🔥 DESPUES DEL Service.find()");
+        console.log("SERVICIOS:", services);
         res.status(200).json({
             success: true,
             services
         })
     } catch (error) {
+        console.error("ERROR AL OBTENER SERVICIOS:", error);
         res.status(500).json({
             success: false,
             message: "Error al obtener servicios"

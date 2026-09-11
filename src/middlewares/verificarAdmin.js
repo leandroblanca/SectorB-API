@@ -1,4 +1,6 @@
 function verificarAdmin(req, res, next) {
+      console.log("🟡 ENTRE A verificarAdmin");
+      console.log("USUARIO:", req.user);
     if (!req.user) {
         return res.status(401).json({
             success: false,
@@ -12,6 +14,7 @@ function verificarAdmin(req, res, next) {
             message: "No tienes permisos de administrador"
         })
     }
+    console.log("🟡 ES ADMIN, PASANDO AL CONTROLADOR");
     next()
 }
 
