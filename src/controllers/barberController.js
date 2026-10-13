@@ -1,6 +1,6 @@
 import Barber from "../models/barber.js";
 
-async function gatBarberController(req, res) {
+async function getBarberController(req, res) {
   try {
     const barbers = await Barber.find().sort({ createdAt: -1 });
     return res.status(200).json({
@@ -9,7 +9,7 @@ async function gatBarberController(req, res) {
     });
   } catch (error) {
     return res.status(500).json({
-      succeses: false,
+      success: false,
       message: "Error al obtener los barberos",
     });
   }
@@ -22,12 +22,12 @@ async function getBarberByIdController(req, res) {
 
     if (!barber) {
       return res.status(404).json({
-        succeses: false,
+        success: false,
         message: "Barbero no encontrado",
       });
     }
-    return res.ststus(200).son({
-      succeses: true,
+    return res.status(200).json({
+      success: true,
       barber,
     });
   } catch (error) {
@@ -40,11 +40,11 @@ async function getBarberByIdController(req, res) {
 
 async function createBarberController(req, res) {
   try {
-    const { name } = await req.body;
+    const { name } = req.body;
     
     if (!name) {
       return res.status(400).json({
-        succeses: false,
+        success: false,
         message: "El nombre del barbero es requerido",
       });
     }
@@ -52,8 +52,8 @@ async function createBarberController(req, res) {
         name,
     });
 
-    return res.ststus(201).son({
-      succeses: true,
+    return res.status(201).json({
+      success: true,
       message: "Barbero creado correctamente",
       barber,
     });
@@ -65,4 +65,59 @@ async function createBarberController(req, res) {
   }
 }
 
-export { gatBarberController, getBarberByIdController, createBarberController };
+async function updateBarberController(req, res) {
+  try {
+    const { id } = req.params;
+    const barber = await Barber.findByIdAndUpdate(
+        id,
+        req.body,
+        {
+            new: true,
+            runValidators: true
+        }
+    )
+    if (!barber) {
+      return res.status(404).json({
+        success: false,
+        message: "Barbero no encontrado ",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Barbero actualizado correctamente",
+      barber
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al crear el barbero",
+    });
+  }
+}
+
+
+async function deleteBarberController(req, res) {
+  try {
+    const { id } = req.params;
+    const barber = await Barber.findByIdAndDelete(id)
+    if (!barber) {
+      return res.status(404).json({
+        success: false,
+        message: "Barbero no encontrado ",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Barbero eliminado correctamente"
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al eliminar el barbero",
+    });
+  }
+}
+
+export { getBarberController, getBarberByIdController, createBarberController, updateBarberController, deleteBarberController};

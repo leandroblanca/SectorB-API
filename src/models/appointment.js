@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import barber from "./barber";
+import barber from "./barber.js";
 
 const appointmentSchema = new mongoose.Schema(
   {
