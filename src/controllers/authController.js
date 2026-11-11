@@ -18,7 +18,7 @@ async function registerController(req, res) {
             lastname,
             email,
             password: hashedPassword,
-            role: "admin"
+            role: "client"
         })
 
         await user.save()
@@ -76,7 +76,9 @@ async function loginController(req, res) {
                 name: user.name,
                 lastname: user.lastname,
                 email: user.email,
-                role: user.role
+                role: user.role,
+                isMainAdmin: user.isMainAdmin,
+                status: user.status,
             }
         })
 

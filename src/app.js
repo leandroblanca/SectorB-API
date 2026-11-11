@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes.js"
 import barberRoutes from "./routes/barberRoutes.js"
 import appointmentsRoutes from "./routes/appointmentsRoutes.js"
 import clientRoutes from "./routes/clientRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 const app = express()
 
 app.use(cors())
@@ -18,6 +19,7 @@ app.use("/api/users", userRoutes)
 app.use("/api/barbers", barberRoutes)
 app.use("/api/appointments", appointmentsRoutes )
 app.use("/api/clients", clientRoutes)
+app.use("/api/admin", adminRoutes)
 
 app.get("/", (req, res) => {
     res.send("Api funciona correctamente")
