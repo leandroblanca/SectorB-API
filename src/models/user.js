@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
       enum: ["client", "admin"],
       default: "client",
     },
+    isMainAdmin: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
       enum: ["active", "inactive"],
