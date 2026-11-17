@@ -2,6 +2,7 @@ import Appointment from "../models/appointment.js";
 import User from "../models/user.js";
 import Service from "../models/service.js";
 import Barber from "../models/barber.js";
+import { time } from "node:console";
 
 async function createAppointmentController(req, res) {
   console.log("datos recibidos", req.body)
@@ -205,6 +206,28 @@ async function updateAppointmentStatusController(req,res) {
     });
   }
 }
+async function getMyAppointmentsController(req,res) {
+  try {
+    const appointments = await Appointment.find({
+      client: req.user.id,
+    })
+    .populate("client", "name lastname")
+    .populate("service", "title price duration")
+    .populate("barber", "name")
+    .sort({date: 1, time: 1})
+
+    return res.status(200).json({
+      success: true,
+      appointments
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error al obtener tus turnos"
+    })
+  }
+}
 
 
 
@@ -212,5 +235,6 @@ export {
     createAppointmentController,
     getAppointmentsController,
     getAppointmentByIdController,
-    updateAppointmentStatusController
+    updateAppointmentStatusController,
+    getMyAppointmentsController
 }
