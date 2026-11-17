@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post("/",verificarToken, verificarAdmin, CreateServiceController)
 
-router.get("/",verificarToken, verificarAdmin, getServiceController)
+router.get("/",verificarToken,  getServiceController)
 
 router.get("/:id",verificarToken, verificarAdmin, getServiceByIdController)
 
