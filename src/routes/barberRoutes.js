@@ -4,7 +4,7 @@ import verificarAdmin from "../middlewares/verificarAdmin.js"
 import verificarToken from "../middlewares/authMiddleware.js"
 const router = express.Router()
 
-router.get("/",verificarToken, verificarAdmin, getBarberController)
+router.get("/",verificarToken, getBarberController)
 router.get("/:id",verificarToken, verificarAdmin, getBarberByIdController)
 router.post("/",verificarToken, verificarAdmin, createBarberController )
 router.put("/:id",verificarToken, verificarAdmin, updateBarberController)

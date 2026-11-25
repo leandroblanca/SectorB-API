@@ -31,6 +31,11 @@ const appointmentSchema = new mongoose.Schema(
       required: [true, "La duracion es requerida"],
       min: [15, "La duracion es de 15 minutos"],
     },
+    notes: {
+      type: String,
+      trim: true,
+      maxlength: 500,
+    },
     status: {
       type: String,
       enum: [

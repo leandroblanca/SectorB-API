@@ -40,7 +40,7 @@ async function getBarberByIdController(req, res) {
 
 async function createBarberController(req, res) {
   try {
-    const { name } = req.body;
+    const { name, image } = req.body;
     
     if (!name) {
       return res.status(400).json({
@@ -50,6 +50,7 @@ async function createBarberController(req, res) {
     }
     const barber = await Barber.create({
         name,
+        image,
     });
 
     return res.status(201).json({
