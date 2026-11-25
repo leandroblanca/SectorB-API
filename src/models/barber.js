@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "node:os";
 
 const barberSchema = new mongoose.Schema(
   {
@@ -8,6 +9,10 @@ const barberSchema = new mongoose.Schema(
       trim: true,
       minlength: [3, "El nombre debe tener al menos 3 caracteres"],
       maxlength: [50, "El nombre no puede superar los 50 caracteres"],
+    },
+    image: {
+      type: String,
+      default: ""
     },
     active: {
       type: Boolean,
