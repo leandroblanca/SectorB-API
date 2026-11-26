@@ -75,7 +75,7 @@ async function getClientDashboardController(req, res) {
         status: "completed",
     })
     .populate("service", "title price")
-    .populate("barber", "name")
+    .populate("barber", "name lastname")
     .sort({date: -1, time: -1})
 
     const clientsSummary = clients.map((client) => {
@@ -92,7 +92,7 @@ async function getClientDashboardController(req, res) {
             ...client.toObject(),
             lastVisit: lastAppointment?.date ?? null,
             lastService: lastAppointment?.service?.title ?? null,
-            lastBarber: lastAppointment?.barber?.name ?? null,
+            lastBarber: [lastAppointment?.barber?.name, lastAppointment?.barber?.lastname].filter(Boolean).join(" ") || null,
             totalSpent
         };
     });
