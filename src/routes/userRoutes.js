@@ -3,7 +3,12 @@ import verificarToken from "../middlewares/authMiddleware.js"
 import { createUserContoller, getUserController, updateUserController, updateUserStatusController } from "../controllers/userController.js"
 import verificarAdmin from "../middlewares/verificarAdmin.js"
 
+import { getMyProfileController, updateMyProfileController } from "../controllers/profileController.js"
+
 const router = express.Router()
+
+router.get("/me", verificarToken, getMyProfileController)
+router.patch("/me", verificarToken, updateMyProfileController)
 
 router.get("/", verificarToken, verificarAdmin, getUserController)
 router.patch("/:id/status", verificarToken, verificarAdmin, updateUserStatusController)
