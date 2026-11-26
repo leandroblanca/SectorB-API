@@ -40,7 +40,7 @@ async function getBarberByIdController(req, res) {
 
 async function createBarberController(req, res) {
   try {
-    const { name, image } = req.body;
+    const { name, lastname, image } = req.body;
     
     if (!name) {
       return res.status(400).json({
@@ -48,9 +48,16 @@ async function createBarberController(req, res) {
         message: "El nombre del barbero es requerido",
       });
     }
+    if (typeof lastname !== "string" || !lastname.trim() || lastname.trim().length > 50) {
+      return res.status(400).json({
+        success: false,
+        message: "Ingresá un apellido de hasta 50 caracteres",
+      });
+    }
     const barber = await Barber.create({
         name,
-        image,
+        lastname,
+      image,
     });
 
     return res.status(201).json({

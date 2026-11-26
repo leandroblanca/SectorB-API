@@ -102,7 +102,7 @@ async function getAppointmentsController(req, res) {
     const appointments = await Appointment.find()
       .populate("client", "name lastname")
       .populate("service", "title price duration")
-      .populate("barber", "name")
+      .populate("barber", "name lastname")
       .sort({ date: 1, time: 1 });
 
     return res.status(200).json({
@@ -123,7 +123,7 @@ async function getAppointmentByIdController(req, res) {
     const appointments = await Appointment.findById(id)
       .populate("client", "name lastname")
       .populate("service", "title price duration")
-      .populate("barber", "name")
+      .populate("barber", "name lastname")
       .sort({ date: 1, time: 1 });
 
     if (!appointments) {
@@ -219,7 +219,7 @@ async function getMyAppointmentsController(req, res) {
     })
       .populate("client", "name lastname")
       .populate("service", "title price duration")
-      .populate("barber", "name")
+      .populate("barber", "name lastname")
       .sort({ date: 1, time: 1 });
 
     return res.status(200).json({
